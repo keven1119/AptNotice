@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.thejoyrun.notice.aptnotice.activity.MainActivity$$NoticeFinder;
+import com.thejoyrun.secondmoduel.ThirdActivity$$NoticeFinder;
 
 /**
  * Created by keven-liang on 2017/10/10.
@@ -28,6 +29,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     public void updataFirst(){
         new MainActivity$$NoticeFinder().updata_message();
+        new ThirdActivity$$NoticeFinder().updata_time();
     }
 
     @Override

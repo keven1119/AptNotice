@@ -56,8 +56,14 @@ public class OnNoticeAnnotatedClass {
 
             injectMethodBuilder.addStatement("Object object =com.thejoyrun.noticefinder.NoticeFinder.FINDER_MAP.get($L);" +
                     "\r\nif(object != null ){" +
-                    "\r\n(($T)object).$N();" +
-                    "\r\n}","\""+getFullClassName()+"\"",hoverboard,method.getmMethodName());
+                    "\r\njava.util.List<Object> list = (java.util.List)object;"+
+                    "\r\nfor(Object model :list){"+
+                    "\r\n(($T)model).$N();" +
+                    "\r\n}"+
+                    "\r\n}",
+                    "\""+getFullClassName()+"\"",
+                    hoverboard,
+                    method.getmMethodName());
             MethodSpec build = injectMethodBuilder.build();
             methodSpecList.add(build);
 

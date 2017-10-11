@@ -13,6 +13,7 @@ import com.thejoyrun.notice.aptnotice.R;
 import com.thejoyrun.notice.aptnotice.SecondActivity;
 import com.thejoyrun.noticefinder.NoticeFinder;
 import com.thejoyrun.noticefinder.annotation.OnNotice;
+import com.thejoyrun.secondmoduel.ThirdActivity;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         Toast.makeText(this, "onButtonClick", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, SecondActivity.class);
+        Intent intent = new Intent(this, ThirdActivity.class);
         startActivity(intent);
     }
 }
