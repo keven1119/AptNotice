@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.thejoyrun.notice.aptnotice.R;
 import com.thejoyrun.notice.aptnotice.SecondActivity;
 import com.thejoyrun.noticefinder.NoticeFinder;
-import com.thejoyrun.noticefinder.annotation.OnNotice;
 import com.thejoyrun.secondmoduel.ThirdActivity;
 
 
