@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AptNotice.iml" filepath="$PROJECT_DIR$/AptNotice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/noticefinder/noticefinder.iml" filepath="$PROJECT_DIR$/noticefinder/noticefinder.iml" />
       <module fileurl="file://$PROJECT_DIR$/noticefinder-annotation/noticefinder-annotation.iml" filepath="$PROJECT_DIR$/noticefinder-annotation/noticefinder-annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/noticefinder-compiler/noticefinder-compiler.iml" filepath="$PROJECT_DIR$/noticefinder-compiler/noticefinder-compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/secondmoduel/secondmoduel.iml" filepath="$PROJECT_DIR$/secondmoduel/secondmoduel.iml" />
     </modules>
   </component>
 </project>
