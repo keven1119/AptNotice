@@ -8,7 +8,11 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.3'
 //        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
-
+        // 发布组件需要的两个
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        // apt需要的插件
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -17,7 +21,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-//        maven { url 'https://jitpack.io' }
+        maven { url 'https://jitpack.io' }
     }
 }
 
