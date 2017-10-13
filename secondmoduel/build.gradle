@@ -34,4 +34,11 @@ dependencies {
     compile project(':noticefinder-annotation')
     compile project(':noticefinder')
     apt project(':noticefinder-compiler')
+//
+//    compile 'com.github.keven1119.AptNotice:noticefinder:0.8'
+//    compile 'com.github.keven1119.AptNotice:noticefinder-annotation:0.8'
+//    apt 'com.github.keven1119.AptNotice:noticefinder-compiler:0.8'
+
+
+
 }

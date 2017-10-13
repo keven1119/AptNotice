@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NoticeFinder.inject(this);
     }
 
-    @OnNotice("updata_message")
+    @OnNotice()
     public void updata(){
         mTextView.setText(System.currentTimeMillis()+"");
     }

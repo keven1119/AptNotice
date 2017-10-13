@@ -20,7 +20,10 @@ public class NoticeFinder {
             if (finder == null) {
                 finder = new ArrayList<>();
             }
-            finder.add(host);
+
+            if(!finder.contains(host)) {
+                finder.add(host);
+            }
             FINDER_MAP.put(className,finder);
         } catch (Exception e) {
             throw new RuntimeException("Unable to inject for " + className, e);

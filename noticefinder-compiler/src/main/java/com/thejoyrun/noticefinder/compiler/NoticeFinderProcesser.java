@@ -44,6 +44,7 @@ public class NoticeFinderProcesser extends AbstractProcessor {
         mFiler = processingEnv.getFiler();
         mElementUtils = processingEnv.getElementUtils();
         mMessager = processingEnv.getMessager();
+        info("processingEnv.getFiler() %s","123" );
     }
 
     @Override
