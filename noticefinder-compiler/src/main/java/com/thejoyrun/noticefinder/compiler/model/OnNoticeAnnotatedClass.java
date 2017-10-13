@@ -44,13 +44,6 @@ public class OnNoticeAnnotatedClass {
         mOnNoticeMethods.add(noticeMethod);
     }
 
-
-//    //生成在基础依赖模块（basemoduel）
-//    public JavaFile generateNotice(){
-//
-//    }
-
-
     //生成在对应的moduel
     public JavaFile generateFinder() {
 
@@ -114,10 +107,20 @@ public class OnNoticeAnnotatedClass {
 
         methodSpecList.add(eventBusMethodBuilder.build());
 
+        MethodSpec constructor = MethodSpec.constructorBuilder()
+                .addModifiers(Modifier.PUBLIC)
+                .addStatement("if(!$T.getDefault().isRegistered(this)){"+
+                        "\r\n$T.getDefault().register(this);"+
+                        "\r\n}",
+                        EventBus.class,
+                        EventBus.class)
+                .build();
+
         // generate whole class
         TypeSpec finderClass = TypeSpec.classBuilder(mClassElement.getSimpleName() + "$$NoticeFinder")
                 .addModifiers(Modifier.PUBLIC)
                 .addMethods(methodSpecList)
+                .addMethod(constructor)
                 .build();
 
 //        String packageName = mElementUtils.getPackageOf(mClassElement).getQualifiedName().toString();

@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.thejoyrun.noticefinder.annotation.OnNotice;
+
 /**
  * Created by keven-liang on 2017/10/10.
  */
