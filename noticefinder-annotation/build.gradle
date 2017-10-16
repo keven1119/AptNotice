@@ -13,7 +13,6 @@ version = RELEASE_VERSION    // 版本号，自己定义，每次修改代码后
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.greenrobot:eventbus:3.0.0'
 }
 
 // compile 'com.yzd:inputcheck-annotation:0.4'

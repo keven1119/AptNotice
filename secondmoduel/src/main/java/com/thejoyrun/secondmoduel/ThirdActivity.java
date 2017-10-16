@@ -2,6 +2,7 @@ package com.thejoyrun.secondmoduel;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.thejoyrun.noticefinder.NoticeFinder;
 import com.thejoyrun.noticefinder.annotation.OnNotice;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.Date;
 
@@ -24,16 +23,17 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-        NoticeFinder.inject(this);
         textView = (TextView) findViewById(R.id.textview);
         button = (Button) findViewById(R.id.btn);
         button.setOnClickListener(this);
+        btn_updatamain = (Button) findViewById(R.id.btn_updatamain);
+        btn_updatamain.setOnClickListener(this);
+
+        NoticeFinder.inject(this);
     }
 
-    @OnNotice()
     public void updata(){
-//        Date today = new ThirdActivity$$NoticeFinder().today();
-//        textView.setText("ThirdActivity ==》"+today.toString());
+        NoticeFinder.toNoticeMethod(Uri.parse(NoticeFinder.getNoticeHost()+"/MainActivity/updata"));
     }
 
     @Override
@@ -45,6 +45,30 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
             intent.setComponent(cn);
             startActivity(intent);
         }else if(view.getId() == R.id.btn_updatamain){
+            updata();
         }
+    }
+
+    @OnNotice()
+    public void updataTime(){
+        textView.setText("haha==>"+System.currentTimeMillis());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        NoticeFinder.unInject(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }

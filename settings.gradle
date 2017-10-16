@@ -1,1 +1,1 @@
-include ':app','secondmoduel',':noticefinder', ':noticefinder-annotation', ':noticefinder-compiler'
+include ':app', ':noticefinder-impl', 'secondmoduel', ':noticefinder', ':noticefinder-annotation', ':noticefinder-compiler'

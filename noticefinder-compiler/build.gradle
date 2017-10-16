@@ -14,7 +14,8 @@ version = RELEASE_VERSION    // 版本号，自己定义，每次修改代码后
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 //    compile "com.thejoyrun:noticefinder-annotation:${RELEASE_VERSION}"
-    compile project(':noticefinder')
+    compile project(':noticefinder-annotation')
+    compile project(':noticefinder-impl')
     compile 'com.squareup:javapoet:1.7.0'
     compile 'com.google.auto.service:auto-service:1.0-rc2'
 }

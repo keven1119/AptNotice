@@ -2,24 +2,20 @@ package com.thejoyrun.noticefinder.compiler.model;
 
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
+import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
-import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
-import com.thejoyrun.noticefinder.event.AptNoticeEvent;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.thejoyrun.impl.ObjectNoticeInter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+
+import static com.thejoyrun.impl.ObjectNoticeInter.NOTICE_SUFFIX;
 
 /**
  * Created by keven-liang on 2017/10/10.
@@ -55,17 +51,11 @@ public class OnNoticeAnnotatedClass {
         String className = fullClassName.substring(dotIndex+1, fullClassName.length());
         ClassName hoverboard = ClassName.get(packageName, className);
 
-        AnnotationSpec.Builder eventBusAnnatiton = AnnotationSpec.builder(Subscribe.class)
-                .addMember("threadMode", "$T.$L",ThreadMode.class,ThreadMode.MAIN.name());
-
-        //创建EventBus接收方法
-        MethodSpec.Builder eventBusMethodBuilder = MethodSpec.methodBuilder("onEventMainThread")
+        //创建invokeMethod接收方法
+        MethodSpec.Builder invokeMethodBuilder = MethodSpec.methodBuilder("invokeMethod")
                 .addModifiers(Modifier.PUBLIC)
-                .addAnnotation(eventBusAnnatiton.build())
-                .addParameter(AptNoticeEvent.class, "event")
-                .addStatement("if(event.eventName.startsWith($S)){"+
-                        "\r\nString[] nameSplit = event.eventName.split(\".\")",
-                        className);
+                .addAnnotation(Override.class)
+                .addParameter(String.class, "methodName");
 
 
         //创建对应通知的方法
@@ -73,29 +63,28 @@ public class OnNoticeAnnotatedClass {
             OnNoticeMethod method = mOnNoticeMethods.get(i);
             String methodName = method.getmMethodName().toString();
 
-            eventBusMethodBuilder.addStatement("\r\nif(nameSplit[1].equals($S)){"+
+            invokeMethodBuilder.addStatement("\r\nif(methodName.equals($S)){"+
                     "\r\n$N();"+
                     "\r\n}",
                     methodName,
                     methodName);
-
-            if(i == mOnNoticeMethods.size() -1){
-                eventBusMethodBuilder.addStatement("}");
-            }
 
 
             // method inject(final T host, Object source, Provider provider)
             MethodSpec.Builder injectMethodBuilder = MethodSpec.methodBuilder(method.getmMethodName().toString())
                     .addModifiers(Modifier.PUBLIC);
 
-            injectMethodBuilder.addStatement("Object object =com.thejoyrun.noticefinder.NoticeFinder.FINDER_MAP.get($L);" +
-                    "\r\nif(object != null ){" +
-                    "\r\njava.util.List<Object> list = (java.util.List)object;"+
-                    "\r\nfor(Object model :list){"+
-                    "\r\n(($T)model).$N();" +
-                    "\r\n}"+
-                    "\r\n}",
-                    "\""+getFullClassName()+"\"",
+            injectMethodBuilder.addStatement("Object noticeObject = com.thejoyrun.noticefinder.NoticeFinder.NOTICE_MAP.get($L);"+
+                            "\r\nif(noticeObject != null){"+
+                            "Object object =com.thejoyrun.noticefinder.NoticeFinder.OBJECT_MAP.get(noticeObject);" +
+                            "\r\nif(object != null ){" +
+                            "\r\njava.util.List<Object> list = (java.util.List)object;"+
+                            "\r\nfor(Object model :list){"+
+                            "\r\n(($T)model).$N();" +
+                            "\r\n}"+
+                            "\r\n}"+
+                            "\r\n}",
+                            "\""+getFullClassName()+"\"",
                     hoverboard,
                     method.getmMethodName());
 
@@ -105,25 +94,16 @@ public class OnNoticeAnnotatedClass {
             System.out.println(build.toString());
         }
 
-        methodSpecList.add(eventBusMethodBuilder.build());
+        methodSpecList.add(invokeMethodBuilder.build());
 
-        MethodSpec constructor = MethodSpec.constructorBuilder()
-                .addModifiers(Modifier.PUBLIC)
-                .addStatement("if(!$T.getDefault().isRegistered(this)){"+
-                        "\r\n$T.getDefault().register(this);"+
-                        "\r\n}",
-                        EventBus.class,
-                        EventBus.class)
-                .build();
+        String simpleName = mClassElement.getSimpleName() + NOTICE_SUFFIX;
 
         // generate whole class
-        TypeSpec finderClass = TypeSpec.classBuilder(mClassElement.getSimpleName() + "$$NoticeFinder")
+        TypeSpec finderClass = TypeSpec.classBuilder(mClassElement.getSimpleName() + NOTICE_SUFFIX)
                 .addModifiers(Modifier.PUBLIC)
                 .addMethods(methodSpecList)
-                .addMethod(constructor)
+                .superclass(ObjectNoticeInter.class)
                 .build();
-
-//        String packageName = mElementUtils.getPackageOf(mClassElement).getQualifiedName().toString();
 
         return JavaFile.builder(packageName, finderClass).build();
     }

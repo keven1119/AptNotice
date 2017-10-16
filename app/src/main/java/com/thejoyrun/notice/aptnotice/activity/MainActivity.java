@@ -37,8 +37,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NoticeFinder.inject(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        NoticeFinder.unInject(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
     @OnNotice()
     public void updata(){
+        mTextView.setText(System.currentTimeMillis()+"");
+    }
+
+    @OnNotice()
+    public void updataAgain(){
         mTextView.setText(System.currentTimeMillis()+"");
     }
 

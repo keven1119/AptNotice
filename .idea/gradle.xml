@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/noticefinder" />
             <option value="$PROJECT_DIR$/noticefinder-annotation" />
             <option value="$PROJECT_DIR$/noticefinder-compiler" />
+            <option value="$PROJECT_DIR$/noticefinder-impl" />
             <option value="$PROJECT_DIR$/secondmoduel" />
           </set>
         </option>
