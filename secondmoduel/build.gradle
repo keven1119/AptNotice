@@ -31,16 +31,16 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-//    compile project(':noticefinder-annotation')
-//    compile project(':noticefinder-impl')
-//    compile project(':noticefinder')
-//    apt project(':noticefinder-compiler')
+    compile project(':noticefinder-annotation')
+    compile project(':noticefinder-impl')
+    compile project(':noticefinder')
+    apt project(':noticefinder-compiler')
 
 //    compile 'com.github.keven1119:AptNotice:1.1'
 
 //
-   compile "com.github.keven1119.AptNotice:noticefinder:${APTNOTICE_VERSION}"
-    compile "com.github.keven1119.AptNotice:noticefinder-annotation:${APTNOTICE_VERSION}"
-    apt "com.github.keven1119.AptNotice:noticefinder-compiler:${APTNOTICE_VERSION}"
+//   compile "com.github.keven1119.AptNotice:noticefinder:${APTNOTICE_VERSION}"
+//    compile "com.github.keven1119.AptNotice:noticefinder-annotation:${APTNOTICE_VERSION}"
+//    apt "com.github.keven1119.AptNotice:noticefinder-compiler:${APTNOTICE_VERSION}"
 
 }
