@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.thejoyrun.notice.aptnotice.activity.MainActivity$$ObjectNoticeInter;
-import com.thejoyrun.noticefinder.annotation.OnNotice;
 import com.thejoyrun.secondmoduel.ThirdActivity$$ObjectNoticeInter;
+
 
 /**
  * Created by keven-liang on 2017/10/10.

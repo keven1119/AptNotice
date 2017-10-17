@@ -19,7 +19,6 @@ public class OnNoticeMethod {
     private ExecutableElement methodElement;
     private Name mClassName;
     private Name mMethodName;
-    private String value;
 
     public OnNoticeMethod(Element element){
         if (element.getKind() != ElementKind.METHOD) {
@@ -27,7 +26,6 @@ public class OnNoticeMethod {
                     String.format("Only methods can be annotated with @%s", OnNotice.class.getSimpleName()));
         }
         this.methodElement = (ExecutableElement) element;
-
         this.mMethodName = methodElement.getSimpleName();
         // method params count must equals 0
         List<? extends VariableElement> parameters = methodElement.getParameters();
@@ -41,7 +39,4 @@ public class OnNoticeMethod {
         return mMethodName;
     }
 
-    public String getValue() {
-        return value;
-    }
 }

@@ -10,6 +10,5 @@ import java.util.Map;
 
 public abstract class ObjectNoticeInter {
     public static final String NOTICE_SUFFIX = "$$ObjectNoticeInter";
-    public static final Map<String,List<String>> SIMPLE_FULL_NAME_MAP = new HashMap<>();
     public abstract void  invokeMethod(String methodName);
 }

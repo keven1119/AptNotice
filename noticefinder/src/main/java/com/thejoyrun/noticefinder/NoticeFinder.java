@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import static com.thejoyrun.impl.ObjectNoticeInter.NOTICE_SUFFIX;
-import static com.thejoyrun.impl.ObjectNoticeInter.SIMPLE_FULL_NAME_MAP;
 
 /**
  * Created by keven-liang on 2017/10/10.
@@ -44,7 +43,9 @@ public class NoticeFinder {
                 objectNotice_objectList = new ArrayList<>();
             }
 
-            objectNotice_objectList.add(host);
+            if(!objectNotice_objectList.contains(host)) {
+                objectNotice_objectList.add(host);
+            }
             OBJECT_MAP.put(objectNotice,objectNotice_objectList);
             NOTICE_MAP.put(className,objectNotice);
 
